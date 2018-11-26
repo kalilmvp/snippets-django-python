@@ -8,7 +8,7 @@ urlpatterns = [
     path('snippets/<int:pk>', views.SnippetDetail.as_view(), name='snippet-detail'),
     path('snippets/<int:pk>/highlighted', views.SnippetHighlight.as_view(), name='snippet-highlight'),
     path('users/', views.UserList.as_view(), name='user-list'),
-    path('snippets/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
+    path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
     path('', views.api_root)
 ]
 
