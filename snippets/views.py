@@ -1,7 +1,19 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
+from rest_framework.reverse import reverse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .serializers import SnippetSerializer, UserSerializer
 from .models import Snippet
+from .permissions import IsOwnerOrReadOnly
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'snippets': reverse('snippet-list', request=request, format=format)
+    })
 
 
 # Create your views here.
@@ -17,7 +29,7 @@ class SnippetList(generics.ListCreateAPIView):
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 
 class UserList(generics.ListAPIView):
