@@ -7,6 +7,9 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 pygments = "*"
+coreapi = "*"
+pyyaml = "*"
+coreapi-cli = "*"
 
 [dev-packages]
 
